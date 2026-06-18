@@ -10,6 +10,18 @@ This project simulates a real-world HR analytics workflow: raw employee data is 
 
 - **PostgreSQL** — data modeling and analysis
 - **Power BI** — interactive dashboard and reporting
+- **VS Code** —  environment for SQL development and script execution
+
+<br>
+
+## 📊 Dashboard Preview
+ 
+
+<div align="center">
+  <img src="doc/workforceiq.png" alt="Dashboard Preview" width="1100"/>
+</div>
+
+<br>
 
 ## Project workflow
 
@@ -37,51 +49,35 @@ Raw CSV data → PostgreSQL (table creation + import) → SQL analysis queries �
 
 Each query was designed to answer a specific HR business question, and each one feeds directly into a Power BI visual.
 
-| # | Business question | Query file | Power BI visual |
-|---|---|---|---|
-| Q1 | What is the total and active headcount? | `Q1_headcount.sql` | KPI card |
-| Q2 | What is the overall attrition rate? | `Q2_attrition_rate.sql` | KPI card |
-| Q3 | Which department has the highest attrition? | `Q3_attrition_by_dept.sql` | Bar chart |
-| Q4 | Is the company's headcount growing year over year? | `Q4_headcount_by_year.sql` | Line chart |
-| Q5 | Is there a pay gap by department and gender? | `Q5_salary_by_dept_gender.sql` | Clustered bar chart |
-| Q6 | How is performance rating distributed across the workforce? | `Q6_performance_distribution.sql` | Donut chart |
-| Q7 | Do higher performers earn more on average? | `Q7_salary_vs_performance.sql` | Bar chart |
-| Q8 | How long do employees typically stay before leaving? | `Q8_tenure_analysis.sql` | Column chart (histogram) |
-| Q9 | What is the gender diversity ratio per department? | `Q9_gender_diversity.sql` | Stacked bar chart |
-| Q10 | Which department has the worst attendance? | `Q10_absenteeism.sql` | Line chart |
-| Q11 | Who are the top 10 highest-paid active employees? | `Q11_top_earners.sql` | Table |
-| Q12 | Has average performance improved year over year by department? | `Q12_yoy_performance.sql` | Line chart |
 
-All 12 queries are available in [`/sql/02_analysis_queries.sql`](./sql/02_analysis_queries.sql).
+| # | Business question | Power BI visual |
+|---|---|---|
+| Q1 | What is the total and active headcount? | KPI card |
+| Q2 | What is the overall attrition rate? | KPI card |
+| Q3 | Which department has the worst attendance? | KPI card |
+| Q4 | Which department has the highest attrition? | Clustered Bar chart |
+| Q5 | Is the company's headcount growing year over year? | Line chart |
+| Q6 | How is performance rating distributed across the workforce? | Donut chart |
+| Q7 | Is there a pay gap by department and gender? | Clustered Bar chart |
+| Q8 | How long do employees typically stay before leaving? | Pie chart |
+| Q9 | Do higher performers earn more on average? | Funnel chart |
+| Q10 | What is the gender diversity ratio per department? | Line and Clustered Column chart |
+| Q11 | Has average performance improved year over year by department? | Line chart |
+| Q12 | Who are the top 10 highest-paid active employees? | Table |
+
+
+All 12 queries are available in [`/queries/all_queries.sql/`](./queries/all_queries.sql).
+
 
 ## Power BI integration
 
 Each query's result set was loaded into Power BI as its own table using **Get Data → PostgreSQL database → Advanced options**, pasting the corresponding SQL query directly. No DAX measures or calculated columns were created — all aggregation and business logic happens at the SQL layer, and Power BI is used purely for visualization and interactivity (slicers, filters, drill-through).
 
-This approach keeps a clean separation of concerns: SQL owns the business logic and is independently verifiable, while Power BI owns the presentation layer.
-
-## Dashboard pages
-
-**Page 1 — Executive summary**
-Total employees, attrition rate, average salary, and average performance rating as KPI cards, with a department-wise headcount overview.
-
-**Page 2 — Attrition analysis**
-Attrition rate by department, hiring trend by year, and tenure distribution.
-
-**Page 3 — Compensation & performance**
-Average salary by department and gender, salary vs. performance rating, and the top 10 highest-paid employees.
-
-**Page 4 — Diversity & attendance**
-Gender diversity by department and monthly absenteeism trend.
-
-## Key insights
-
-- *(Add 3–5 bullet points here once you've explored your final dashboard — e.g. "Engineering has the highest attrition rate at X%", "Female representation is lowest in Operations at X%", "Top performers earn on average X% more than average performers.")*
 
 ## Repository structure
 
 ```
-hr-analytics-dashboard/
+WorkforceIQ — HR Analytics Dashboard/
 │
 ├── data/
 │   ├── employees.csv
@@ -90,18 +86,15 @@ hr-analytics-dashboard/
 │   ├── performance.csv
 │   └── attendance.csv
 │
-├── sql/
-│   ├── 01_create_tables.sql
-│   └── 02_analysis_queries.sql
+├── queries/
+│   ├── schema.sql
+│   └── all_queries.sql
 │
-├── powerbi/
-│   └── HR_Analytics_Dashboard.pbix
+├── doc/
+│   ├── schema.erd.json
+│   └── workforceiq.pbix
 │
-├── screenshots/
-│   ├── executive_summary.png
-│   ├── attrition_analysis.png
-│   ├── compensation.png
-│   └── diversity_attendance.png
+├── LICENSE
 │
 └── README.md
 ```
@@ -110,20 +103,35 @@ hr-analytics-dashboard/
 
 1. Clone the repository
    ```
-   git clone https://github.com/your-username/hr-analytics-dashboard.git
+   git clone https://github.com/bithiNath/WorkforceIQ.git
    ```
-2. Run `sql/01_create_tables.sql` in PostgreSQL (via `psql` or pgAdmin)
-3. Import the CSV files from `/data` into their corresponding tables using the `COPY` commands above
-4. Run the queries in `sql/02_analysis_queries.sql` to verify the data
-5. Open `powerbi/HR_Analytics_Dashboard.pbix` in Power BI Desktop
-6. Update the data source connection (File → Options and settings → Data source settings) to point to your local PostgreSQL instance
-7. Refresh the data (Home → Refresh)
+2. Run `schema.sql` in PostgreSQL or VScode to create database and tables.
+3. Import the CSV files from `/data` by using VS Code terminal:
+   * Open the VS Code integrated terminal and connect to your PostgreSQL database using `psql`:
+     ```bash
+     psql -U your_username -d your_database_name
+     ```
+   * Run the following `\copy` command for each table (change table and file names accordingly):
+     ```sql
+     \copy table_name FROM 'data/your_file.csv' DELIMITER ',' CSV HEADER;
+     ```
+4. Run the queries in `queries/all_queries.sql` to verify the data.
+5. View Dashboard Screenshots: open `doc/workforceiq.csv`
 
-## Author
 
-**Your Name**
-[LinkedIn](#) · [Portfolio](#) · [Email](#)
+## 📜 License
 
-## License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-This project uses synthetically generated data for educational and portfolio purposes only.
+
+## 📬 Contact
+
+- **GitHub:** [@bithiNath](https://github.com/bithiNath)
+- **LinkedIn:** [Bithi Nath](https://linkedin.com/in/bithinath)
+
+---
+
+<br>
+
+<p align="center">Developed by <a href="https://github.com/bithiNath">@bithiNath</a> ⚡</p>
+
