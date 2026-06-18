@@ -2,7 +2,7 @@
 
 An end-to-end HR analytics project that tracks employee attrition, compensation, performance, diversity, and attendance using SQL for data analysis and Power BI for visualization.
 
-## Overview
+## 📌 Overview
 
 This project simulates a real-world HR analytics workflow: raw employee data is loaded into a PostgreSQL database, analyzed using SQL, and visualized in an interactive Power BI dashboard. The goal is to answer the kind of business questions an HR or People Analytics team would actually ask — who is leaving, who is underpaid, which departments struggle with attendance, and whether performance and pay are aligned.
 
@@ -73,7 +73,7 @@ All 12 queries are available in [`/queries/all_queries.sql/`](./queries/all_quer
 
 <br>
 
-## Power BI integration
+## 📊  Power BI integration
 
 Each query's result set was loaded into Power BI as its own table using `**Get Data → PostgreSQL database → Advanced options**`, pasting the corresponding SQL query directly. No DAX measures or calculated columns were created — all aggregation and business logic happens at the SQL layer, and Power BI is used purely for visualization and interactivity (slicers, filters, drill-through).
 
@@ -106,9 +106,9 @@ WorkforceIQ — HR Analytics Dashboard/
 
 <br>
 
-## How to run this project
+## ⚙️ How to run this project
 
-1. Clone the repository
+1.  Clone the repository
    ```
    git clone https://github.com/bithiNath/WorkforceIQ.git
    ```
