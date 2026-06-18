@@ -125,11 +125,13 @@ WorkforceIQ — HR Analytics Dashboard/
 4. Run the queries in `queries/all_queries.sql` to verify the data.
 5. View Dashboard Screenshots: open `doc/workforceiq.csv`
 
+<br>
 
 ## 📜 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
+<br>
 
 ## 📬 Contact
 
