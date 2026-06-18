@@ -6,7 +6,7 @@ An end-to-end HR analytics project that tracks employee attrition, compensation,
 
 This project simulates a real-world HR analytics workflow: raw employee data is loaded into a PostgreSQL database, analyzed using SQL, and visualized in an interactive Power BI dashboard. The goal is to answer the kind of business questions an HR or People Analytics team would actually ask — who is leaving, who is underpaid, which departments struggle with attendance, and whether performance and pay are aligned.
 
-## Tech stack
+## 🛠️ Tech stack
 
 - **PostgreSQL** — data modeling and analysis
 - **Power BI** — interactive dashboard and reporting
