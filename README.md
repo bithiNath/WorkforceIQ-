@@ -14,7 +14,7 @@ This project simulates a real-world HR analytics workflow: raw employee data is 
 
 <br>
 
-## 📊 Dashboard Preview
+## 📊 PowerBI Dashboard
  
 
 <div align="center">
@@ -71,7 +71,7 @@ All 12 queries are available in [`/queries/all_queries.sql/`](./queries/all_quer
 
 ## Power BI integration
 
-Each query's result set was loaded into Power BI as its own table using **Get Data → PostgreSQL database → Advanced options**, pasting the corresponding SQL query directly. No DAX measures or calculated columns were created — all aggregation and business logic happens at the SQL layer, and Power BI is used purely for visualization and interactivity (slicers, filters, drill-through).
+Each query's result set was loaded into Power BI as its own table using `**Get Data → PostgreSQL database → Advanced options**`, pasting the corresponding SQL query directly. No DAX measures or calculated columns were created — all aggregation and business logic happens at the SQL layer, and Power BI is used purely for visualization and interactivity (slicers, filters, drill-through).
 
 
 ## Repository structure
